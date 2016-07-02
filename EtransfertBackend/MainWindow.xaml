@@ -1,0 +1,74 @@
+﻿<telerik:RadRibbonWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:local="clr-namespace:EtransfertBackend" x:Class="EtransfertBackend.MainWindow"
+        Title="Etransfert backend" Height="350" Width="525" WindowState="Maximized" Loaded="RadRibbonWindow_Loaded_1" Icon="Images/Logo/Template.ico">
+    <Grid x:Name="RootGrid">
+        <Grid x:Name="FirstLayout">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="581*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <telerik:RadRibbonView x:Name="rrvMain" VerticalAlignment="Top" Grid.ColumnSpan="2" Title="" ApplicationName="EtransfertBackend" BackstageClippingElement="{Binding ElementName=RootGrid}" MinimizeButtonVisibility="Visible" HelpButtonVisibility="Visible" IsApplicationMenuOpen="False">
+
+                <telerik:RadRibbonTab Header="Production" IsSelected="True" Visibility="Visible">
+                    <!--<telerik:RadRibbonGroup Header="Echange" Tag="" Visibility="Collapsed">
+                        <telerik:RadRibbonButton Content="Liste des Militants" Click="btnListeMilitant_Click" Tag="CanShowMilitants" LargeImage="/Images/Menu/Group-Add.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Enregistrement des Militants" Click="btnEnregMilitant_Click" Tag="CanShowMilitants" LargeImage="/Images/Menu/Business-Man.png" Size="Large" Visibility="Collapsed"/>
+
+                    </telerik:RadRibbonGroup>-->
+                    <telerik:RadRibbonGroup Header="Backend" Tag="" Visibility="Visible">
+                        <telerik:RadRibbonButton Content="Offre Promo" Tag="CanShowPromo" LargeImage="/Images/Menu/settings.png" Size="Large" Click="PromoButton_Click"/>
+                        <telerik:RadRibbonButton Content="Compte principal" Tag="CanShowCompte" LargeImage="/Images/Menu/settings.png" Size="Large" />
+                        <telerik:RadRibbonButton Content="Roles" Tag="CanShowRole" LargeImage="/Images/Menu/settings.png" Size="Large" Click="RolesBtnClick" />
+                        <telerik:RadRibbonButton Content="Attribuer role" Tag="CanShowRoleUser" LargeImage="/Images/Menu/Group-Add.png" Size="Large" Click="AjouterRoleBtnClick" />
+                        <!--<telerik:RadRibbonButton Content="Regions" Click="btnRegions_Click" Tag="CanShowRegions" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Entreprise" Click="btnEntreprise_Click" Tag="CanShowEntreprise" LargeImage="/Images/Menu/Customer.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Federations" Click="btnFederations_Click" Tag="CanShowFederations" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Sections" Click="btnSections_Click" Tag="CanShowSections" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Bases" Click="btnBases_Click" Tag="CanShowBases" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Clients" Click="btnClients_Click" Tag="CanShowClients" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Organes" Click="btnOrganes_Click" Tag="CanShowOrganes" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Fonction Parti" Click="btnFonctionParti_Click" Tag="CanShowFonctionParti" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Fonctions" Click="btnFonctions_Click" Tag="CanShowFonctions" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
+                        <telerik:RadRibbonButton Content="Nature piece" Click="btnNaturePiece_Click" Tag="CanShowNaturePiece" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>-->
+                    </telerik:RadRibbonGroup>
+                    <!--<telerik:RadRibbonGroup Header="Etats">
+                        <telerik:RadRibbonButton Click="btnRapport_Click" Tag="RAPPORT" LargeImage="/Images/Menu/Documents-01.png"  Size="Large"/>
+                    </telerik:RadRibbonGroup>
+                    <telerik:RadRibbonGroup Header="Statistiques">
+                    </telerik:RadRibbonGroup>-->
+                </telerik:RadRibbonTab>
+                <!--<telerik:RadRibbonTab Header="Administration" IsSelected="False" Visibility="Collapsed">
+                    <telerik:RadRibbonGroup Header="Utilisateurs" Tag="" Visibility="Collapsed">
+                        <telerik:RadRibbonButton Content="Utilisateurs" Click="btnUtilisateurs_Click" Tag="CanShowUtilisateurs" LargeImage="/Images/Menu/Group-Add.png" Size="Large" Visibility="Collapsed"/>
+                    </telerik:RadRibbonGroup>
+                </telerik:RadRibbonTab>-->
+                <telerik:RadRibbonTab/>
+                <telerik:RadRibbonTab/>
+                <telerik:RadRibbonTab/>
+                <telerik:RadRibbonTab/>
+
+            </telerik:RadRibbonView>
+
+            <telerik:RadDocking CloseButtonPosition="InPaneAndGroup"  Grid.Row="1">
+
+                <telerik:RadDocking.DocumentHost>
+                    <telerik:RadSplitContainer>
+                        <telerik:RadPaneGroup x:Name="rpgMainView" Background="LightGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  />
+                    </telerik:RadSplitContainer>
+                </telerik:RadDocking.DocumentHost>
+
+            </telerik:RadDocking>
+        </Grid>
+
+        <!--<local:LoginControl  x:Name="logControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed"/>-->
+
+    </Grid>
+</telerik:RadRibbonWindow>
