@@ -4,12 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        xmlns:local="clr-namespace:EtransfertBackend.RolesUserModules.ViewModels"
-        xmlns:DataFilter="clr-namespace:Telerik.Windows.Controls.Data.DataFilter;assembly=Telerik.Windows.Controls.Data" x:Class="EtransfertBackend.RolesUserModules.DataGridView"
+        xmlns:local="clr-namespace:EtransfertBackend.RechargementModules.ViewModels"
+        xmlns:DataFilter="clr-namespace:Telerik.Windows.Controls.Data.DataFilter;assembly=Telerik.Windows.Controls.Data" x:Class="EtransfertBackend.RechargementModules.DataGridView"
         mc:Ignorable="d" 
         d:DesignHeight="300" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <local:RolesUserViewModel x:Key="RolesUserViewModel" />
+        <local:RechargementViewModel x:Key="RechargementViewModel" />
         <telerik:InvertedBooleanConverter x:Key="InverseBooleanConverter" />
         <local:EntityObjectToInt x:Key="EntityObjectToInt" />
         <!--EditorTemplate for the Name property.-->
@@ -22,30 +22,21 @@
         		MinWidth="100" />
         </DataTemplate>
 
-        <DataTemplate x:Key='AspNetUsersEditorTemplate'>
-            <telerik:RadComboBox FontFamily='Perpetua Titling MT' DisplayMemberPath='Email' ItemsSource='{Binding AllUsers, Source={StaticResource RolesUserViewModel}}' 
+        <DataTemplate x:Key='RechargementEditorTemplate'>
+            <telerik:RadComboBox FontFamily='Perpetua Titling MT' DisplayMemberPath='useremail' ItemsSource='{Binding AllData, Source={StaticResource RechargementViewModel}}' 
 SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, FallbackValue=null, Mode=TwoWay}' MinWidth='100'/>
         </DataTemplate>
-        <DataTemplate x:Key='AspNetRolesEditorTemplate'>
-            <telerik:RadComboBox FontFamily='Perpetua Titling MT' DisplayMemberPath='Name' ItemsSource='{Binding AllRoles, Source={StaticResource RolesUserViewModel}}' 
-SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, FallbackValue=null, Mode=TwoWay}' MinWidth='100'/>
-        </DataTemplate>
-        
-       
-
 
         <local:MyEditorTemplateSelector x:Key="MyEditorTemplateSelector">
             <local:MyEditorTemplateSelector.EditorTemplateRules>
-                <local:EditorTemplateRule PropertyName='UserId' DataTemplate='{StaticResource AspNetUsersEditorTemplate}' />
-                <local:EditorTemplateRule PropertyName='RoleId' DataTemplate='{StaticResource AspNetRolesEditorTemplate}' />
-                <!--<local:EditorTemplateRule PropertyName='CreatedAt' DataTemplate='{StaticResource dateFilterEditorTemplate}' />-->
             </local:MyEditorTemplateSelector.EditorTemplateRules>
         </local:MyEditorTemplateSelector>
 
         <DataTemplate x:Key="MyTemplate">
             <StackPanel>
-                <telerik:DataFormDataField Label='Code' DataMemberBinding='{Binding Code, Mode=TwoWay}' />
-                <telerik:DataFormDataField Label='Identifications' DataMemberBinding='{Binding Description, Mode=TwoWay}' />
+                <telerik:DataFormDataField Label='Email' DataMemberBinding='{Binding useremail, Mode=TwoWay}' />
+                <telerik:DataFormDataField Label='Montant' DataMemberBinding='{Binding Montant, Mode=TwoWay}' />
+                <telerik:DataFormDataField Label='Date transaction' DataMemberBinding='{Binding DateTransaction, Mode=TwoWay}' />
 
             </StackPanel>
         </DataTemplate>
@@ -53,7 +44,7 @@ SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, Fal
         <local:Types x:Key="Types" />
 
     </UserControl.Resources>
-    <Grid Name="Main" DataContext="{StaticResource RolesUserViewModel}">
+    <Grid Name="Main" DataContext="{StaticResource RechargementViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="199*"/>
@@ -70,10 +61,9 @@ SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, Fal
 				MinHeight="200" MaxHeight="250"
 				Margin="1" AutoGenerateItemPropertyDefinitions="False">
                 <telerik:RadDataFilter.ItemPropertyDefinitions>
-                    <DataFilter:ItemPropertyDefinition DisplayName='Email' PropertyName='UserId'  PropertyType='{Binding String, Source={StaticResource Types}}' />
-                    <DataFilter:ItemPropertyDefinition DisplayName='Role' PropertyName='RoleId'  PropertyType='{Binding String, Source={StaticResource Types}}' />
-                    <DataFilter:ItemPropertyDefinition DisplayName='Date creation' PropertyName='CreatedAt'  PropertyType='{Binding DateTime, Source={StaticResource Types}}' />
-   
+                    <DataFilter:ItemPropertyDefinition DisplayName='Email' PropertyName='useremail'  PropertyType='{Binding String, Source={StaticResource Types}}' />
+                    <DataFilter:ItemPropertyDefinition DisplayName='Montant' PropertyName='Montant'  PropertyType='{Binding String, Source={StaticResource Types}}' />
+                    <DataFilter:ItemPropertyDefinition DisplayName='Date transaction' PropertyName='DateTransaction'  PropertyType='{Binding Date, Source={StaticResource Types}}' />
                 </telerik:RadDataFilter.ItemPropertyDefinitions>
             </telerik:RadDataFilter>
 
@@ -87,7 +77,7 @@ SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, Fal
                 </Grid.RowDefinitions>
 
                 <telerik:RadDataPager x:Name="raddatapager" Grid.Row="0" 
-					PageSize="50" Margin="2"
+					PageSize="30" Margin="2"
 					Source="{Binding FilteredSource, ElementName=radDataFilter}" />
                 <StackPanel Orientation="Horizontal" Margin="0,2,118,2" HorizontalAlignment="Right">
                     <TextBlock Text="PageSize:"  Margin="0,7,0,5"/>
@@ -104,27 +94,23 @@ SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, Fal
 					Grid.Row="1"
 					Margin="2" ItemsSource="{Binding FilteredSource, ElementName=radDataFilter}" FrozenColumnCount="0" SelectedItem="{Binding SelectedData}" >
                     <telerik:RadGridView.Columns>
-
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AspNetUsers.Email}' Header='Email'  Width='180' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AllUsers.CompteUnite}' Header='Solde compte' Width='120' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AspNetRoles.Name}' Header='Role' Width='150' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AspNetUsers.SeuilUnite}' Header='Seuil max' Width='150' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding CreatedAt}' Header='Date création' Width='150' IsReadOnly='True' DataFormatString=' {0:dd/MM/yyyy hh:mm:ss} ' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding UpdatedAt}' Header='Date modification' Width='150' IsReadOnly='True' DataFormatString=' {0:dd/MM/yyyy hh:mm:ss} '  />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Deleted}' Header='Est supprimé?' Width='150' IsReadOnly='True' />
-                        <!--<telerik:GridViewDataColumn DataMemberBinding='{Binding Departements.Description}' Header='Departement' Width='150' IsReadOnly='True' />-->
-                        <!--<telerik:GridViewDataColumn DataMemberBinding='{Binding Utilisateurs.FullName}' Header='Utilisateur' Width='150' IsReadOnly='True' />-->
-                    </telerik:RadGridView.Columns>
+                        <!--<telerik:GridViewDataColumn DataMemberBinding='{Binding Id}' Header='Id' Width='150' IsReadOnly='True' />-->
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding DateTransaction}' Header='Date transaction' Width='200' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Montant}' Header='Montant' Width='170' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding benef}' Header='Benefice' Width='130' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding useremail}' Header='Administrateur' Width='200' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Etat}' Header='Etat' Width='200' IsReadOnly='True' />
+                        </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
             </Grid>
             <StackPanel Grid.Column="2" Margin="0,38,0,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" >
                 <telerik:RadButton x:Name="btnRefresh" ToolTip="Actualiser" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="{x:Null}" Click="btnRefresh_Click"  >
                     <Image Source="/Images/CRUD/Reload.png" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </telerik:RadButton>
-                <telerik:RadButton x:Name="btnAdd" ToolTip="Ajouter" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="{x:Null}" Click="btnAdd_Click" Visibility="Visible">
+                <telerik:RadButton x:Name="btnAdd" ToolTip="Ajouter" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="{x:Null}" Click="btnAdd_Click" Visibility="Visible" >
                     <Image Source="/Images/CRUD/Add.png" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </telerik:RadButton>
-                <telerik:RadButton x:Name="btnEdit" ToolTip="Modifier" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="{x:Null}" Click="btnEdit_Click" Visibility="Visible">
+                <telerik:RadButton x:Name="btnEdit" ToolTip="Modifier" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="{x:Null}" Click="btnEdit_Click" Visibility="Visible" >
                     <Image Source="/Images/CRUD/Edit.png" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </telerik:RadButton>
                 <telerik:RadButton x:Name="btnDelete" ToolTip="Supprimer" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="{x:Null}" Click="btnDelete_Click" Visibility="Visible">

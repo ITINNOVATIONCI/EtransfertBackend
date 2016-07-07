@@ -510,15 +510,45 @@ namespace EtransfertBackend
         {
             RadDocumentPane rad = new RadDocumentPane();
             rad.Content = new EtransfertBackend.RolesUserModules.DataGridView();
-            rad.Header = "Attribution de roles à un utilisateur";
-            rrvMain.Title = "Attribution de roles à un utilisateur";
+            rad.Header = "Role";
+            rrvMain.Title = "Role";
             rad.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             rad.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
 
 
-            
-           rpgMainView.AddItem(rad, Telerik.Windows.Controls.Docking.DockPosition.Center);
-            
+
+            rpgMainView.AddItem(rad, Telerik.Windows.Controls.Docking.DockPosition.Center);
+
         }
+
+        private void ListeTransactionClick(object sender, RoutedEventArgs e)
+        {
+            RadDocumentPane rad = new RadDocumentPane();
+            rad.Content = new EtransfertBackend.TransactionsModules.DataGridView();
+            rad.Header = "Liste transactions";
+            rrvMain.Title = "Liste transactions";
+            rad.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            rad.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+
+
+
+            rpgMainView.AddItem(rad, Telerik.Windows.Controls.Docking.DockPosition.Center);
+        }
+
+
+        private void RechargementBtnClick(object sender, RoutedEventArgs e)
+        {
+            RadDocumentPane rad = new RadDocumentPane();
+            rad.Content = new EtransfertBackend.RechargementModules.DataGridView();
+            rad.Header = "Liste des Rechargements";
+            rrvMain.Title = "Liste des Rechargements";
+            rad.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            rad.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+
+
+
+            rpgMainView.AddItem(rad, Telerik.Windows.Controls.Docking.DockPosition.Center);
+        }
+
     }
 }

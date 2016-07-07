@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="eTransferttestModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="eTransferttestModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="eTransferttestModel.AspNetUserRoles" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="eTransferttestModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTransferttestModel.AspNetUsers" Width="1.5" PointX="1" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="eTransferttestModel.Comptes" Width="1.5" PointX="5.75" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="eTransferttestModel.Contacts" Width="1.5" PointX="7.75" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="eTransferttestModel.Promotion" Width="1.5" PointX="8.75" PointY="2.625" IsExpanded="true" />
@@ -24,6 +24,9 @@
         <AssociationConnector Association="eTransferttestModel.FK_IdentityUserLogin_string__ApplicationUser_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="eTransferttestModel.FK_IdentityUserRole_string__ApplicationUser_UserId" ManuallyRouted="false" />
         <EntityTypeShape EntityType="eTransferttestModel.C__EFMigrationsHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="eTransferttestModel.ListeTransactions" Width="1.5" PointX="12.375" PointY="9.75" />
+        <EntityTypeShape EntityType="eTransferttestModel.ListeTransfert" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="eTransferttestModel.ListeTransactionsFull" Width="1.5" PointX="0.75" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

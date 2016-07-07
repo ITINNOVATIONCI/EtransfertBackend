@@ -25,9 +25,10 @@
                     </telerik:RadRibbonGroup>-->
                     <telerik:RadRibbonGroup Header="Backend" Tag="" Visibility="Visible">
                         <telerik:RadRibbonButton Content="Offre Promo" Tag="CanShowPromo" LargeImage="/Images/Menu/settings.png" Size="Large" Click="PromoButton_Click"/>
-                        <telerik:RadRibbonButton Content="Compte principal" Tag="CanShowCompte" LargeImage="/Images/Menu/settings.png" Size="Large" />
+                        <telerik:RadRibbonButton Content="Compte principal" Tag="CanShowCompte" LargeImage="/Images/Menu/settings.png" Size="Large" Click="RechargementBtnClick" />
                         <telerik:RadRibbonButton Content="Roles" Tag="CanShowRole" LargeImage="/Images/Menu/settings.png" Size="Large" Click="RolesBtnClick" />
                         <telerik:RadRibbonButton Content="Attribuer role" Tag="CanShowRoleUser" LargeImage="/Images/Menu/Group-Add.png" Size="Large" Click="AjouterRoleBtnClick" />
+                        <telerik:RadRibbonButton Content="Transaction" Tag="CanShowTransaction" LargeImage="/Images/Menu/Group-Add.png" Size="Large" Click="ListeTransactionClick" />
                         <!--<telerik:RadRibbonButton Content="Regions" Click="btnRegions_Click" Tag="CanShowRegions" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>
                         <telerik:RadRibbonButton Content="Entreprise" Click="btnEntreprise_Click" Tag="CanShowEntreprise" LargeImage="/Images/Menu/Customer.png" Size="Large" Visibility="Collapsed"/>
                         <telerik:RadRibbonButton Content="Federations" Click="btnFederations_Click" Tag="CanShowFederations" LargeImage="/Images/Menu/settings.png" Size="Large" Visibility="Collapsed"/>

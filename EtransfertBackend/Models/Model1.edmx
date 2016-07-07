@@ -191,6 +191,86 @@
           <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
           <Property Name="Deleted" Type="bit" />
         </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'eTransferttest.dbo.ListeTransactions' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="ListeTransactions">
+          <Key>
+            <PropertyRef Name="Montant" />
+            <PropertyRef Name="Pourcentage" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="Date" Type="datetime2" Precision="7" />
+          <Property Name="DateTransaction" Type="datetime2" Precision="7" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="Numero" Type="nvarchar(max)" />
+          <Property Name="Montant" Type="float" Nullable="false" />
+          <Property Name="Pourcentage" Type="float" Nullable="false" />
+          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+          <Property Name="TypeTransfert" Type="nvarchar(max)" />
+          <Property Name="TypeTransaction" Type="nvarchar(max)" />
+          <Property Name="Etat" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'eTransferttest.dbo.ListeTransactionsFull' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="ListeTransactionsFull">
+          <Key>
+            <PropertyRef Name="CompteUnite" />
+            <PropertyRef Name="SeuilUnite" />
+            <PropertyRef Name="Benef" />
+            <PropertyRef Name="Montant" />
+            <PropertyRef Name="Pourcentage" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="Date" Type="datetime2" Precision="7" />
+          <Property Name="DateTransaction" Type="datetime2" Precision="7" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="CompteUnite" Type="float" Nullable="false" />
+          <Property Name="SeuilUnite" Type="float" Nullable="false" />
+          <Property Name="Benef" Type="float" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar(max)" />
+          <Property Name="Montant" Type="float" Nullable="false" />
+          <Property Name="Pourcentage" Type="float" Nullable="false" />
+          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+          <Property Name="TypeTransfert" Type="nvarchar(max)" />
+          <Property Name="TypeTransaction" Type="nvarchar(max)" />
+          <Property Name="Etat" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'eTransferttest.dbo.ListeTransfert' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="ListeTransfert">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdTransaction" />
+            <PropertyRef Name="SeuilUnite" />
+            <PropertyRef Name="CompteUnite" />
+            <PropertyRef Name="Montant" />
+            <PropertyRef Name="Pourcentage" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="IdTransaction" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="day" Type="int" />
+          <Property Name="DateTransaction" Type="datetime2" Precision="7" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="SeuilUnite" Type="float" Nullable="false" />
+          <Property Name="CompteUnite" Type="float" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar(max)" />
+          <Property Name="Montant" Type="float" Nullable="false" />
+          <Property Name="Pourcentage" Type="float" Nullable="false" />
+          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="TypeTransaction" Type="nvarchar(max)" />
+          <Property Name="TypeTransfert" Type="nvarchar(max)" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="Utilisateur" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+        </EntityType>
         <Association Name="FK_IdentityRoleClaim&lt;string&gt;_IdentityRole_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -276,6 +356,64 @@
           <EntitySet Name="TodoItems" EntityType="Self.TodoItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trace" EntityType="Self.Trace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListeTransactions" EntityType="Self.ListeTransactions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListeTransactions].[Date] AS [Date], 
+    [ListeTransactions].[DateTransaction] AS [DateTransaction], 
+    [ListeTransactions].[Email] AS [Email], 
+    [ListeTransactions].[Numero] AS [Numero], 
+    [ListeTransactions].[Montant] AS [Montant], 
+    [ListeTransactions].[Pourcentage] AS [Pourcentage], 
+    [ListeTransactions].[Total] AS [Total], 
+    [ListeTransactions].[message] AS [message], 
+    [ListeTransactions].[status] AS [status], 
+    [ListeTransactions].[TypeTransfert] AS [TypeTransfert], 
+    [ListeTransactions].[TypeTransaction] AS [TypeTransaction], 
+    [ListeTransactions].[Etat] AS [Etat]
+    FROM [dbo].[ListeTransactions] AS [ListeTransactions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ListeTransactionsFull" EntityType="Self.ListeTransactionsFull" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListeTransactionsFull].[Date] AS [Date], 
+    [ListeTransactionsFull].[DateTransaction] AS [DateTransaction], 
+    [ListeTransactionsFull].[Email] AS [Email], 
+    [ListeTransactionsFull].[CompteUnite] AS [CompteUnite], 
+    [ListeTransactionsFull].[SeuilUnite] AS [SeuilUnite], 
+    [ListeTransactionsFull].[Benef] AS [Benef], 
+    [ListeTransactionsFull].[Numero] AS [Numero], 
+    [ListeTransactionsFull].[Montant] AS [Montant], 
+    [ListeTransactionsFull].[Pourcentage] AS [Pourcentage], 
+    [ListeTransactionsFull].[Total] AS [Total], 
+    [ListeTransactionsFull].[message] AS [message], 
+    [ListeTransactionsFull].[status] AS [status], 
+    [ListeTransactionsFull].[TypeTransfert] AS [TypeTransfert], 
+    [ListeTransactionsFull].[TypeTransaction] AS [TypeTransaction], 
+    [ListeTransactionsFull].[Etat] AS [Etat]
+    FROM [dbo].[ListeTransactionsFull] AS [ListeTransactionsFull]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ListeTransfert" EntityType="Self.ListeTransfert" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListeTransfert].[Id] AS [Id], 
+    [ListeTransfert].[IdTransaction] AS [IdTransaction], 
+    [ListeTransfert].[Date] AS [Date], 
+    [ListeTransfert].[year] AS [year], 
+    [ListeTransfert].[month] AS [month], 
+    [ListeTransfert].[day] AS [day], 
+    [ListeTransfert].[DateTransaction] AS [DateTransaction], 
+    [ListeTransfert].[Email] AS [Email], 
+    [ListeTransfert].[SeuilUnite] AS [SeuilUnite], 
+    [ListeTransfert].[CompteUnite] AS [CompteUnite], 
+    [ListeTransfert].[Numero] AS [Numero], 
+    [ListeTransfert].[Montant] AS [Montant], 
+    [ListeTransfert].[Pourcentage] AS [Pourcentage], 
+    [ListeTransfert].[Total] AS [Total], 
+    [ListeTransfert].[TypeTransaction] AS [TypeTransaction], 
+    [ListeTransfert].[TypeTransfert] AS [TypeTransfert], 
+    [ListeTransfert].[message] AS [message], 
+    [ListeTransfert].[Utilisateur] AS [Utilisateur], 
+    [ListeTransfert].[status] AS [status]
+    FROM [dbo].[ListeTransfert] AS [ListeTransfert]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_IdentityRoleClaim&lt;string&gt;_IdentityRole_RoleId" Association="Self.FK_IdentityRoleClaim&lt;string&gt;_IdentityRole_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetRoleClaims" EntitySet="AspNetRoleClaims" />
@@ -595,6 +733,9 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <EntitySet Name="C__EFMigrationsHistory" EntityType="eTransferttestModel.C__EFMigrationsHistory" />
+          <EntitySet Name="ListeTransactions" EntityType="eTransferttestModel.ListeTransactions" />
+          <EntitySet Name="ListeTransfert" EntityType="eTransferttestModel.ListeTransfert" />
+          <EntitySet Name="ListeTransactionsFull" EntityType="eTransferttestModel.ListeTransactionsFull" />
         </EntityContainer>
         <EntityType Name="C__EFMigrationsHistory">
           <Key>
@@ -602,6 +743,80 @@
           </Key>
           <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListeTransactions">
+          <Key>
+            <PropertyRef Name="Montant" />
+            <PropertyRef Name="Pourcentage" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="7" />
+          <Property Name="DateTransaction" Type="DateTime" Precision="7" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Montant" Type="Double" Nullable="false" />
+          <Property Name="Pourcentage" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeTransfert" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeTransaction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Etat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListeTransfert">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdTransaction" />
+            <PropertyRef Name="SeuilUnite" />
+            <PropertyRef Name="CompteUnite" />
+            <PropertyRef Name="Montant" />
+            <PropertyRef Name="Pourcentage" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="IdTransaction" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="7" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="day" Type="Int32" />
+          <Property Name="DateTransaction" Type="DateTime" Precision="7" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SeuilUnite" Type="Double" Nullable="false" />
+          <Property Name="CompteUnite" Type="Double" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Montant" Type="Double" Nullable="false" />
+          <Property Name="Pourcentage" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="TypeTransaction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeTransfert" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Utilisateur" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListeTransactionsFull">
+          <Key>
+            <PropertyRef Name="CompteUnite" />
+            <PropertyRef Name="SeuilUnite" />
+            <PropertyRef Name="Benef" />
+            <PropertyRef Name="Montant" />
+            <PropertyRef Name="Pourcentage" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="7" />
+          <Property Name="DateTransaction" Type="DateTime" Precision="7" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CompteUnite" Type="Double" Nullable="false" />
+          <Property Name="SeuilUnite" Type="Double" Nullable="false" />
+          <Property Name="Benef" Type="Double" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Montant" Type="Double" Nullable="false" />
+          <Property Name="Pourcentage" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeTransfert" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeTransaction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Etat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -804,6 +1019,70 @@
               <MappingFragment StoreEntitySet="__EFMigrationsHistory">
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListeTransactions">
+            <EntityTypeMapping TypeName="eTransferttestModel.ListeTransactions">
+              <MappingFragment StoreEntitySet="ListeTransactions">
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="TypeTransaction" ColumnName="TypeTransaction" />
+                <ScalarProperty Name="TypeTransfert" ColumnName="TypeTransfert" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Pourcentage" ColumnName="Pourcentage" />
+                <ScalarProperty Name="Montant" ColumnName="Montant" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateTransaction" ColumnName="DateTransaction" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListeTransfert">
+            <EntityTypeMapping TypeName="eTransferttestModel.ListeTransfert">
+              <MappingFragment StoreEntitySet="ListeTransfert">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Utilisateur" ColumnName="Utilisateur" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="TypeTransfert" ColumnName="TypeTransfert" />
+                <ScalarProperty Name="TypeTransaction" ColumnName="TypeTransaction" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Pourcentage" ColumnName="Pourcentage" />
+                <ScalarProperty Name="Montant" ColumnName="Montant" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="CompteUnite" ColumnName="CompteUnite" />
+                <ScalarProperty Name="SeuilUnite" ColumnName="SeuilUnite" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateTransaction" ColumnName="DateTransaction" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdTransaction" ColumnName="IdTransaction" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListeTransactionsFull">
+            <EntityTypeMapping TypeName="eTransferttestModel.ListeTransactionsFull">
+              <MappingFragment StoreEntitySet="ListeTransactionsFull">
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="TypeTransaction" ColumnName="TypeTransaction" />
+                <ScalarProperty Name="TypeTransfert" ColumnName="TypeTransfert" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Pourcentage" ColumnName="Pourcentage" />
+                <ScalarProperty Name="Montant" ColumnName="Montant" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Benef" ColumnName="Benef" />
+                <ScalarProperty Name="SeuilUnite" ColumnName="SeuilUnite" />
+                <ScalarProperty Name="CompteUnite" ColumnName="CompteUnite" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateTransaction" ColumnName="DateTransaction" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

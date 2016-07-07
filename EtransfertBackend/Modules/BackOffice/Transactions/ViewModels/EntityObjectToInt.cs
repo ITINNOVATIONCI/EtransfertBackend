@@ -7,31 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 
-namespace EtransfertBackend.RolesUserModules.ViewModels
+namespace EtransfertBackend.TransactionsModules.ViewModels
 {
     public class EntityObjectToInt : IValueConverter
     {
-        public String fullName;
+        
         public object Convert(object value, Type targetType, object parameter,
                               CultureInfo culture)
         {
 
-           
-
-            
-
             if (value is AspNetUsers)
             {
                 var rec = (AspNetUsers)value;
+               
                 return rec.Id;
             }
 
-            if (value is AspNetRoles)
-            {
-                var rec = (AspNetRoles)value;
-                return rec.Id;
-            }
 
+            
 
 
             return 0;
@@ -44,14 +37,12 @@ namespace EtransfertBackend.RolesUserModules.ViewModels
             if (value is AspNetUsers)
             {
                 var rec = (AspNetUsers)value;
+
                 return rec.Id;
             }
 
-            if (value is AspNetRoles)
-            {
-                var rec = (AspNetRoles)value;
-                return rec.Id;
-            }
+
+
 
             return 0;
         }

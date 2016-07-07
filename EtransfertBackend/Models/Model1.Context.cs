@@ -39,5 +39,8 @@ namespace EtransfertBackend.Models
         public virtual DbSet<Trace> Trace { get; set; }
         public virtual DbSet<Transactions> Transactions { get; set; }
         public virtual DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
+        public virtual DbSet<ListeTransactions> ListeTransactions { get; set; }
+        public virtual DbSet<ListeTransfert> ListeTransfert { get; set; }
+        public virtual DbSet<ListeTransactionsFull> ListeTransactionsFull { get; set; }
     }
 }

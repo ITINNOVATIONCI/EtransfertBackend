@@ -4,12 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        xmlns:local="clr-namespace:EtransfertBackend.RolesUserModules.ViewModels"
-        xmlns:DataFilter="clr-namespace:Telerik.Windows.Controls.Data.DataFilter;assembly=Telerik.Windows.Controls.Data" x:Class="EtransfertBackend.RolesUserModules.DataGridView"
+        xmlns:local="clr-namespace:EtransfertBackend.TransactionsModules.ViewModels"
+        xmlns:DataFilter="clr-namespace:Telerik.Windows.Controls.Data.DataFilter;assembly=Telerik.Windows.Controls.Data" x:Class="EtransfertBackend.TransactionsModules.DataGridView"
         mc:Ignorable="d" 
         d:DesignHeight="300" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <local:RolesUserViewModel x:Key="RolesUserViewModel" />
+        <local:TransactionsViewModel x:Key="TransactionsViewModel" />
         <telerik:InvertedBooleanConverter x:Key="InverseBooleanConverter" />
         <local:EntityObjectToInt x:Key="EntityObjectToInt" />
         <!--EditorTemplate for the Name property.-->
@@ -23,21 +23,21 @@
         </DataTemplate>
 
         <DataTemplate x:Key='AspNetUsersEditorTemplate'>
-            <telerik:RadComboBox FontFamily='Perpetua Titling MT' DisplayMemberPath='Email' ItemsSource='{Binding AllUsers, Source={StaticResource RolesUserViewModel}}' 
+            <telerik:RadComboBox FontFamily='Perpetua Titling MT' DisplayMemberPath='Email' ItemsSource='{Binding AllUsers, Source={StaticResource TransactionsViewModel}}' 
 SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, FallbackValue=null, Mode=TwoWay}' MinWidth='100'/>
         </DataTemplate>
-        <DataTemplate x:Key='AspNetRolesEditorTemplate'>
-            <telerik:RadComboBox FontFamily='Perpetua Titling MT' DisplayMemberPath='Name' ItemsSource='{Binding AllRoles, Source={StaticResource RolesUserViewModel}}' 
+        <!--<DataTemplate x:Key='AspNetRolesEditorTemplate'>
+            <telerik:RadComboBox FontFamily='Perpetua Titling MT' DisplayMemberPath='Name' ItemsSource='{Binding AllRoles, Source={StaticResource TransactionsViewModel}}' 
 SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, FallbackValue=null, Mode=TwoWay}' MinWidth='100'/>
-        </DataTemplate>
+        </DataTemplate>-->
         
        
 
 
         <local:MyEditorTemplateSelector x:Key="MyEditorTemplateSelector">
             <local:MyEditorTemplateSelector.EditorTemplateRules>
-                <local:EditorTemplateRule PropertyName='UserId' DataTemplate='{StaticResource AspNetUsersEditorTemplate}' />
-                <local:EditorTemplateRule PropertyName='RoleId' DataTemplate='{StaticResource AspNetRolesEditorTemplate}' />
+                <local:EditorTemplateRule PropertyName='Id' DataTemplate='{StaticResource AspNetUsersEditorTemplate}' />
+                <!--<local:EditorTemplateRule PropertyName='RoleId' DataTemplate='{StaticResource AspNetRolesEditorTemplate}' />-->
                 <!--<local:EditorTemplateRule PropertyName='CreatedAt' DataTemplate='{StaticResource dateFilterEditorTemplate}' />-->
             </local:MyEditorTemplateSelector.EditorTemplateRules>
         </local:MyEditorTemplateSelector>
@@ -53,7 +53,7 @@ SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, Fal
         <local:Types x:Key="Types" />
 
     </UserControl.Resources>
-    <Grid Name="Main" DataContext="{StaticResource RolesUserViewModel}">
+    <Grid Name="Main" DataContext="{StaticResource TransactionsViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="199*"/>
@@ -70,9 +70,10 @@ SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, Fal
 				MinHeight="200" MaxHeight="250"
 				Margin="1" AutoGenerateItemPropertyDefinitions="False">
                 <telerik:RadDataFilter.ItemPropertyDefinitions>
-                    <DataFilter:ItemPropertyDefinition DisplayName='Email' PropertyName='UserId'  PropertyType='{Binding String, Source={StaticResource Types}}' />
-                    <DataFilter:ItemPropertyDefinition DisplayName='Role' PropertyName='RoleId'  PropertyType='{Binding String, Source={StaticResource Types}}' />
-                    <DataFilter:ItemPropertyDefinition DisplayName='Date creation' PropertyName='CreatedAt'  PropertyType='{Binding DateTime, Source={StaticResource Types}}' />
+                    <DataFilter:ItemPropertyDefinition DisplayName='Email' PropertyName='Id'  PropertyType='{Binding String, Source={StaticResource Types}}' />
+                    <DataFilter:ItemPropertyDefinition DisplayName='Numero' PropertyName='Numero'  PropertyType='{Binding String, Source={StaticResource Types}}' />
+                    <DataFilter:ItemPropertyDefinition DisplayName='Montant' PropertyName='Montant'  PropertyType='{Binding Double, Source={StaticResource Types}}' />
+                    <DataFilter:ItemPropertyDefinition DisplayName='Date transaction' PropertyName='DateTransaction'  PropertyType='{Binding DateTime, Source={StaticResource Types}}' />
    
                 </telerik:RadDataFilter.ItemPropertyDefinitions>
             </telerik:RadDataFilter>
@@ -105,13 +106,19 @@ SelectedValue='{Binding Value, Converter={StaticResource EntityObjectToInt}, Fal
 					Margin="2" ItemsSource="{Binding FilteredSource, ElementName=radDataFilter}" FrozenColumnCount="0" SelectedItem="{Binding SelectedData}" >
                     <telerik:RadGridView.Columns>
 
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AspNetUsers.Email}' Header='Email'  Width='180' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AllUsers.CompteUnite}' Header='Solde compte' Width='120' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AspNetRoles.Name}' Header='Role' Width='150' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding AspNetUsers.SeuilUnite}' Header='Seuil max' Width='150' IsReadOnly='True' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding CreatedAt}' Header='Date création' Width='150' IsReadOnly='True' DataFormatString=' {0:dd/MM/yyyy hh:mm:ss} ' />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding UpdatedAt}' Header='Date modification' Width='150' IsReadOnly='True' DataFormatString=' {0:dd/MM/yyyy hh:mm:ss} '  />
-                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Deleted}' Header='Est supprimé?' Width='150' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding DateTransaction}' Header='Date Transaction'  Width='180' IsReadOnly='True'  DataFormatString=' {0:dd/MM/yyyy hh:mm:ss} ' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Email}' Header='Email'  Width='180' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding CompteUnite}' Header='Solde compte' Width='120' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Numero}' Header='Numero' Width='120' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Montant}' Header='Montant' Width='150' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Pourcentage}' Header='%' Width='150' IsReadOnly='True' />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Total}' Header='Total' Width='150' IsReadOnly='True'/>
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Benef}' Header='Benef' Width='150' IsReadOnly='True'/>
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding TypeTransaction}' Header='Type transaction' Width='150' IsReadOnly='True'/>
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding TypeTransfert}' Header='Type transfert' Width='150' IsReadOnly='True'/>
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding status}' Header='Statut' Width='150' IsReadOnly='True'/>
+                       <!-- <telerik:GridViewDataColumn DataMemberBinding='{Binding UpdatedAt}' Header='Date modification' Width='150' IsReadOnly='True' DataFormatString=' {0:dd/MM/yyyy hh:mm:ss} '  />
+                        <telerik:GridViewDataColumn DataMemberBinding='{Binding Deleted}' Header='Est supprimé?' Width='150' IsReadOnly='True' />-->
                         <!--<telerik:GridViewDataColumn DataMemberBinding='{Binding Departements.Description}' Header='Departement' Width='150' IsReadOnly='True' />-->
                         <!--<telerik:GridViewDataColumn DataMemberBinding='{Binding Utilisateurs.FullName}' Header='Utilisateur' Width='150' IsReadOnly='True' />-->
                     </telerik:RadGridView.Columns>
